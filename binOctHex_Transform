@@ -1,0 +1,58 @@
+binaryNum = []
+octalNum = []
+hexNum = []
+nextNum = 0
+
+def transformToBinary(a):
+    binaryNum.append(a%2)
+    nextNum = int(a/2)
+    if nextNum < 2:
+        binaryNum.append(int(nextNum))
+        binaryResult = 0
+        for element in reversed(binaryNum):
+            binaryResult = (binaryResult*10) + element
+        return binaryResult
+    else:
+        return transformToBinary(nextNum)
+        
+def transformToOctal(a):
+    octalNum.append(a%8)
+    nextNum = int(a/8)
+    if nextNum < 8:
+        octalNum.append(int(nextNum))
+        octalResult = 0
+        for element in reversed(octalNum):
+            octalResult = (octalResult*10) + element
+        return octalResult
+    else:
+        return transformToOctal(nextNum)
+        
+def transformToHex(a):
+    hexNum.append(a%16)
+    nextNum = int(a/16)
+    if nextNum < 16:
+        if nextNum != 0:
+            hexNum.append(int(nextNum))
+        hexResult = ""
+        for element in reversed(hexNum):
+            if element == 10:
+                element = 'A'
+            elif element == 11:
+                element = 'B'
+            elif element == 12:
+                element = 'C'
+            elif element == 13:
+                element = 'D'
+            elif element == 14:
+                element = 'E'
+            elif element == 15:
+                element = 'F'
+            hexResult += str(element)
+        return hexResult
+    else:
+        return transformToHex(nextNum)
+
+inputNum = int(input("Digues un nombre enter: "))
+print (transformToBinary(inputNum), end = ", ")
+print (transformToOctal(inputNum), end = ", ")
+print (transformToHex(inputNum))
